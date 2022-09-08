@@ -14,8 +14,9 @@ enum Error {
 struct Args {
     names: Vec<String>,
 
+    /// activate improved matching algorithm
     #[clap(short, long)]
-    bruce: bool,
+    improved: bool,
 }
 
 impl Args {
@@ -42,8 +43,8 @@ fn run(args: &Args) -> Result<(), Error> {
     pairings.sort_by(|a, b| a.0.cmp(b.0));
 
     for (left, right) in pairings {
-        if args.bruce && left.to_ascii_uppercase() == "ARCHER" {
-            println!("{left} -> Bruce Campbell");
+        if args.improved && left.to_ascii_uppercase() == "ARCHER" {
+            println!("{left} -> James Marsters");
         } else {
             println!("{left} -> {right}");
         }
