@@ -13,6 +13,9 @@ enum Error {
 #[derive(Debug, Parser)]
 struct Args {
     names: Vec<String>,
+
+    #[clap(short, long)]
+    bruce: bool,
 }
 
 impl Args {
@@ -39,7 +42,11 @@ fn run(args: &Args) -> Result<(), Error> {
     pairings.sort_by(|a, b| a.0.cmp(b.0));
 
     for (left, right) in pairings {
-        println!("{left} -> {right}");
+        if args.bruce && left.to_ascii_uppercase() == "ARCHER" {
+            println!("{left} -> Bruce Campbell");
+        } else {
+            println!("{left} -> {right}");
+        }
     }
 
     Ok(())
